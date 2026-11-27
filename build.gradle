@@ -4,6 +4,15 @@ plugins {
     id 'com.gtnewhorizons.gtnhconvention'
 }
 
+// Pinned release version. `gtnh.modules.gitVersion` is disabled in gradle.properties, so the convention takes
+// project.version from this property instead of deriving it from git tags. Without a tag in the clone the
+// derivation fails and silently falls back to "NO-GIT-TAG-SET"; this keeps the artifact, the generated
+// codechicken.multipart.Tags.VERSION field and mcmod.info at a fixed, meaningful version.
+// Bump this line when preparing a release, and tag the release commit to match.
+ext.modVersion = '2.0.2'
+// Belt and braces: if git versioning were ever re-enabled, this keeps project.version on the pinned value.
+version = ext.modVersion
+
 tasks.test {
     useJUnitPlatform()
     testLogging {
