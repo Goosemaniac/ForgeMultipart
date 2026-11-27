@@ -19,22 +19,14 @@ import org.junit.jupiter.api.Test;
  */
 class ServerSignatureResolutionFunctionalTest {
 
-    private static final String[] SERVER_LOADED_TYPES = {
-            "codechicken.multipart.TileMultipart",
-            "codechicken.multipart.TileMultipart$",
-            "codechicken.multipart.TileMultipartClient",
-            "codechicken.multipart.BlockMultipart",
-            "codechicken.multipart.BlockMultipart$",
-            "codechicken.multipart.TMultiPart",
-            "codechicken.multipart.IconHitEffects",
-            "codechicken.multipart.ISBRHPart",
-            "codechicken.microblock.Microblock",
-            "codechicken.microblock.ItemMicroPart",
-            "codechicken.microblock.MicroMaterialRegistry",
-            "codechicken.microblock.handler.MicroblockProxy",
-            "codechicken.microblock.handler.MicroblockProxy$",
-            "codechicken.microblock.handler.MicroblockProxy_clientImpl",
-            "codechicken.multipart.minecraft.LeverPart",
+    private static final String[] SERVER_LOADED_TYPES = { "codechicken.multipart.TileMultipart",
+            "codechicken.multipart.TileMultipart$", "codechicken.multipart.TileMultipartClient",
+            "codechicken.multipart.BlockMultipart", "codechicken.multipart.BlockMultipart$",
+            "codechicken.multipart.TMultiPart", "codechicken.multipart.IconHitEffects",
+            "codechicken.multipart.ISBRHPart", "codechicken.microblock.Microblock",
+            "codechicken.microblock.ItemMicroPart", "codechicken.microblock.MicroMaterialRegistry",
+            "codechicken.microblock.handler.MicroblockProxy", "codechicken.microblock.handler.MicroblockProxy$",
+            "codechicken.microblock.handler.MicroblockProxy_clientImpl", "codechicken.multipart.minecraft.LeverPart",
             "codechicken.multipart.minecraft.McBlockPart" };
 
     @Test
