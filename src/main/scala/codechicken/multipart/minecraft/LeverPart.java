@@ -15,6 +15,8 @@ import codechicken.lib.math.MathHelper;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.multipart.IFaceRedstonePart;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class LeverPart extends McSidedMetaPart implements IFaceRedstonePart {
 
@@ -89,6 +91,7 @@ public class LeverPart extends McSidedMetaPart implements IFaceRedstonePart {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void drawBreaking(RenderBlocks renderBlocks) {
         IBlockAccess actual = renderBlocks.blockAccess;
         renderBlocks.blockAccess = new PartMetaAccess(this);

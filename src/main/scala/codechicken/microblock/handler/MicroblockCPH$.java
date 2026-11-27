@@ -10,6 +10,8 @@ import net.minecraft.util.ChatComponentTranslation;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.packet.PacketCustom.IClientPacketHandler;
 import codechicken.microblock.MicroMaterialRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.MatchError;
 
 public final class MicroblockCPH$ extends MicroblockPH implements IClientPacketHandler {
@@ -19,6 +21,7 @@ public final class MicroblockCPH$ extends MicroblockPH implements IClientPacketH
     private MicroblockCPH$() {}
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void handlePacket(PacketCustom packet, Minecraft minecraft, INetHandlerPlayClient netHandler) {
         int type = packet.getType();
         if (type == 1) {

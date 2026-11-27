@@ -24,6 +24,8 @@ import codechicken.lib.raytracer.ExtendedMOP;
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.lib.render.TextureUtils;
 import codechicken.lib.vec.Cuboid6;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.Tuple2;
 import scala.collection.Iterator;
 
@@ -42,6 +44,7 @@ public class BlockMultipart extends Block {
         return null;
     }
 
+    @SideOnly(Side.CLIENT)
     public static TileMultipartClient getClientTile(IBlockAccess world, int x, int y, int z) {
         net.minecraft.tileentity.TileEntity t = world.getTileEntity(x, y, z);
         if (t instanceof TileMultipartClient && !((TileMultipart) t).partList().isEmpty()) {
@@ -216,6 +219,7 @@ public class BlockMultipart extends Block {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean addHitEffects(World world, MovingObjectPosition hit, EffectRenderer effectRenderer) {
         TileMultipartClient tile = getClientTile(world, hit.blockX, hit.blockY, hit.blockZ);
         if (tile != null) {
@@ -233,6 +237,7 @@ public class BlockMultipart extends Block {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean addDestroyEffects(World world, int x, int y, int z, int s, EffectRenderer effectRenderer) {
         return true;
     }
@@ -300,6 +305,7 @@ public class BlockMultipart extends Block {
 
     /** Kludge to set PROTECTED blockIcon to a blank icon. */
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister register) {
         net.minecraft.util.IIcon icon = TextureUtils.getBlankIcon(16, register);
         setBlockTextureName(icon.getIconName());
@@ -313,6 +319,7 @@ public class BlockMultipart extends Block {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
         TileMultipartClient tile = getClientTile(world, x, y, z);
         if (tile != null) {

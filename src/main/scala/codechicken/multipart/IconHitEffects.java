@@ -9,6 +9,8 @@ import codechicken.lib.raytracer.ExtendedMOP;
 import codechicken.lib.render.EntityDigIconFX;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Static implementations of the functions a part would override on {@link TMultiPart} for standard Minecraft style hit
@@ -22,6 +24,7 @@ public final class IconHitEffects {
 
     private IconHitEffects() {}
 
+    @SideOnly(Side.CLIENT)
     public static void addHitEffects(JIconHitEffects part, MovingObjectPosition hit, EffectRenderer effectRenderer) {
         TileMultipart tile = ((TMultiPart) part).tile();
         World world = tile.getWorldObj();
@@ -40,10 +43,12 @@ public final class IconHitEffects {
                 effectRenderer);
     }
 
+    @SideOnly(Side.CLIENT)
     public static void addDestroyEffects(JIconHitEffects part, EffectRenderer effectRenderer) {
         addDestroyEffects(part, effectRenderer, true);
     }
 
+    @SideOnly(Side.CLIENT)
     public static void addDestroyEffects(JIconHitEffects part, EffectRenderer effectRenderer, boolean scaleDensity) {
         IIcon[] icons = new IIcon[6];
         for (int i = 0; i < 6; i++) {

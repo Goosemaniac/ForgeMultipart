@@ -15,6 +15,8 @@ import codechicken.lib.packet.PacketCustom.IClientPacketHandler;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.TileMultipart;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.MatchError;
 
 public final class MultipartCPH$ extends MultipartPH implements IClientPacketHandler {
@@ -24,6 +26,7 @@ public final class MultipartCPH$ extends MultipartPH implements IClientPacketHan
     private MultipartCPH$() {}
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void handlePacket(PacketCustom packet, Minecraft minecraft, INetHandlerPlayClient netHandler) {
         try {
             int type = packet.getType();

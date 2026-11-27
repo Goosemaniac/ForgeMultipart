@@ -82,6 +82,7 @@ public final class MicroblockProxy {
         MicroblockProxy$.MODULE$.addSawRecipe(saw, blade);
     }
 
+    @SideOnly(Side.CLIENT)
     public static RenderBlocks renderBlocks() {
         return MicroblockProxy$.MODULE$.renderBlocks();
     }

@@ -7,6 +7,7 @@ import codechicken.multipart.{
   TIconHitEffects,
   TSlottedPart
 }
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.client.particle.EffectRenderer
 import net.minecraft.util.MovingObjectPosition
 
@@ -18,14 +19,17 @@ trait MicroblockClient
   def getBrokenIcon(side: Int) = MicroblockTraitLogic.getBrokenIcon(this, side)
 
   // TIconHitEffects is a Java interface, so these must be declared explicitly or TMultiPart's empty versions win.
+  @SideOnly(Side.CLIENT)
   override def addHitEffects(
       hit: MovingObjectPosition,
       effectRenderer: EffectRenderer
   ) = IconHitEffects.addHitEffects(this, hit, effectRenderer)
 
+  @SideOnly(Side.CLIENT)
   override def addDestroyEffects(effectRenderer: EffectRenderer) =
     IconHitEffects.addDestroyEffects(this, effectRenderer)
 
+  @SideOnly(Side.CLIENT)
   override def renderStatic(pos: Vector3, pass: Int) =
     MicroblockTraitLogic.renderStatic(this, pos, pass)
 

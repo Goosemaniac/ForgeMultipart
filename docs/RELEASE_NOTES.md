@@ -106,6 +106,15 @@ Java.** `MultipartProxy.postInit()` exists in the raw jar but inherits `@SideOnl
 forwarder on a dedicated server and the call fails with `NoSuchMethodError`. Call `MultipartProxy$.MODULE$.postInit()`
 as the Scala reference did.
 
+The same applies to the client render and particle hooks. `TileMultipart.renderStatic`, `TMultiPart.drawBreaking`,
+`TMultiPart.addHitEffects`/`addDestroyEffects`, `ISBRHPart.renderWorldBlock`, `IconHitEffects`, the microblock
+`drawBreaking`/`addDestroyEffects` overrides, `BlockMultipart.getClientTile`/`addHitEffects`/`addDestroyEffects`/
+`registerBlockIcons`/`randomDisplayTick`, `ItemMicroPart.registerIcons` and `MicroblockProxy.renderBlocks` are
+`@SideOnly(CLIENT)`, so a dedicated server never loads `RenderBlocks`, `EffectRenderer` or `IIconRegister` for them.
+Call them from client code only; a server-side caller sees `NoSuchMethodError` rather than a missing client class. As a
+side effect, `Class.getDeclaredMethods()`/`getDeclaredMethod(...)` on FMP's API classes is safe on a dedicated server,
+which is what breaks when a client-only type leaks into a kept signature.
+
 ## Adopting the Java API
 
 You do not have to convert your mod to Java. A Scala mod can call the Java surface directly, and the documented

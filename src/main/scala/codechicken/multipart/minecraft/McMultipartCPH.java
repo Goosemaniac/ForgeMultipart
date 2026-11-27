@@ -7,12 +7,15 @@ import net.minecraft.network.play.INetHandlerPlayClient;
 import codechicken.lib.packet.PacketCustom;
 import codechicken.lib.packet.PacketCustom.IClientPacketHandler;
 import codechicken.lib.vec.BlockCoord;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class McMultipartCPH implements IClientPacketHandler {
 
     public static Object channel = MinecraftMultipartMod.instance;
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void handlePacket(PacketCustom packet, Minecraft mc, INetHandlerPlayClient netHandler) {
         switch (packet.getType()) {
             case 1:
@@ -21,6 +24,7 @@ public class McMultipartCPH implements IClientPacketHandler {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     private void spawnBurnoutSmoke(WorldClient world, BlockCoord pos) {
         for (int l = 0; l < 5; l++) world.spawnParticle(
                 "smoke",

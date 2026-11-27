@@ -29,6 +29,8 @@ import codechicken.lib.world.IChunkLoadTile;
 import codechicken.multipart.handler.MultipartCompatiblity;
 import codechicken.multipart.handler.MultipartProxy;
 import codechicken.multipart.handler.MultipartSPH;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.Function1;
 import scala.Tuple2;
 import scala.collection.Iterator;
@@ -372,6 +374,7 @@ public class TileMultipart extends TileEntity implements IChunkLoadTile {
     }
 
     /** Client render hook overridden by generated tiles carrying TileMultipartClient. */
+    @SideOnly(Side.CLIENT)
     public boolean renderStatic(IBlockAccess world, Vector3 position, RenderBlocks renderer) {
         return false;
     }

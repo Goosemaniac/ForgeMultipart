@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.microblock.MicroMaterialRegistry.IMicroMaterial;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.Tuple2;
 
 public class ItemMicroPart extends Item {
@@ -54,6 +56,7 @@ public class ItemMicroPart extends Item {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {}
 
     @Override

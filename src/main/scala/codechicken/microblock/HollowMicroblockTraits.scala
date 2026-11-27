@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.RenderBlocks
 import codechicken.multipart.{TFacePart, TMultiPart, TNormalOcclusion}
 import codechicken.lib.vec.{Cuboid6, Vector3}
 import codechicken.microblock.MicroMaterialRegistry.IMicroMaterial
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 
 trait HollowMicroblockClient
     extends HollowMicroblock
@@ -17,6 +18,7 @@ trait HollowMicroblockClient
     HollowMicroblockClientLogic.updateRenderMask(this)
   }
 
+  @SideOnly(Side.CLIENT)
   override def drawBreaking(renderBlocks: RenderBlocks) =
     HollowMicroblockClientLogic.drawBreaking(this, renderBlocks)
 
