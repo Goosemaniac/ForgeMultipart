@@ -5,6 +5,8 @@ import net.minecraft.network.play.INetHandlerPlayClient;
 import net.minecraft.world.World;
 
 import codechicken.lib.packet.PacketCustom;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public final class MultipartCPH {
 
@@ -18,6 +20,7 @@ public final class MultipartCPH {
         return MultipartCPH$.MODULE$.registryChannel();
     }
 
+    @SideOnly(Side.CLIENT)
     public static void handlePacket(PacketCustom packet, Minecraft minecraft, INetHandlerPlayClient netHandler) {
         MultipartCPH$.MODULE$.handlePacket(packet, minecraft, netHandler);
     }

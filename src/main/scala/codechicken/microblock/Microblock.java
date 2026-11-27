@@ -62,6 +62,7 @@ public abstract class Microblock extends TMultiPart implements TCuboidPart {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void drawBreaking(RenderBlocks renderBlocks) {
         JCuboidPart.renderBreaking(this, renderBlocks);
     }

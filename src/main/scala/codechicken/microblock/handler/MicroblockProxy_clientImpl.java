@@ -21,6 +21,7 @@ public class MicroblockProxy_clientImpl extends MicroblockProxy_serverImpl {
 
     private volatile boolean bitmap$0;
 
+    @SideOnly(Side.CLIENT)
     private RenderBlocks renderBlocks$lzycompute() {
         synchronized (this) {
             if (!bitmap$0) {
@@ -31,6 +32,7 @@ public class MicroblockProxy_clientImpl extends MicroblockProxy_serverImpl {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     public RenderBlocks renderBlocks() {
         return bitmap$0 ? renderBlocks : renderBlocks$lzycompute();
     }

@@ -16,6 +16,8 @@ import codechicken.lib.vec.Translation;
 import codechicken.lib.vec.Vector3;
 import codechicken.microblock.MicroMaterialRegistry.IMicroMaterial;
 import codechicken.multipart.TMultiPart;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.Function5;
 import scala.MatchError;
 import scala.runtime.AbstractFunction5;
@@ -31,6 +33,7 @@ final class HollowMicroblockClientLogic {
         part.renderMask_$eq(part.renderMask() & 0xff | part.getHollowSize() << 8);
     }
 
+    @SideOnly(Side.CLIENT)
     static void drawBreaking(HollowMicroblockClient part, RenderBlocks renderBlocks) {
         CCRenderState state = CCRenderState.instance();
         state.resetInstance();

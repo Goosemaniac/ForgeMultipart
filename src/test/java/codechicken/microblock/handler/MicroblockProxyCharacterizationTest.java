@@ -56,7 +56,13 @@ class MicroblockProxyCharacterizationTest {
     private static final Set<String> CLIENT_METHODS = new TreeSet<>(
             Arrays.asList("init()V", "postInit()V", "renderBlocks()Lnet/minecraft/client/renderer/RenderBlocks;"));
     private static final Set<String> FACADE_METHODS = new TreeSet<>();
-    private static final Set<String> CLIENT_ONLY_METHODS = new TreeSet<>(Arrays.asList("init()V", "postInit()V"));
+    private static final Set<String> CLIENT_ONLY_METHODS = new TreeSet<>(
+            Arrays.asList("init()V", "postInit()V", "renderBlocks()Lnet/minecraft/client/renderer/RenderBlocks;"));
+    private static final Set<String> CLIENT_IMPL_SIDE_ONLY_METHODS = new TreeSet<>(CLIENT_ONLY_METHODS);
+
+    static {
+        CLIENT_IMPL_SIDE_ONLY_METHODS.add("renderBlocks$lzycompute()Lnet/minecraft/client/renderer/RenderBlocks;");
+    }
 
     static {
         FACADE_METHODS.addAll(SERVER_METHODS);
@@ -112,13 +118,13 @@ class MicroblockProxyCharacterizationTest {
         Method lazyCompute = MicroblockProxy_clientImpl.class.getDeclaredMethod("renderBlocks$lzycompute");
         assertSame(RenderBlocks.class, lazyCompute.getReturnType());
         assertTrue(Modifier.isPrivate(lazyCompute.getModifiers()));
-        assertNull(lazyCompute.getAnnotation(SideOnly.class));
+        assertEquals(Side.CLIENT, lazyCompute.getAnnotation(SideOnly.class).value());
     }
 
     @Test
     void keepsOnlyTheClientLifecycleOverridesSideOnly() {
         assertSideOnlyMethods(MicroblockProxy_serverImpl.class, new TreeSet<String>());
-        assertSideOnlyMethods(MicroblockProxy_clientImpl.class, CLIENT_ONLY_METHODS);
+        assertSideOnlyMethods(MicroblockProxy_clientImpl.class, CLIENT_IMPL_SIDE_ONLY_METHODS);
         assertSideOnlyMethods(MicroblockProxy.class, CLIENT_ONLY_METHODS);
         assertSideOnlyMethods(MicroblockProxy$.class, new TreeSet<String>());
 

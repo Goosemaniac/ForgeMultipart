@@ -219,6 +219,7 @@ public final class MicroMaterialRegistry {
      * Internal FMP client texture-lifecycle dispatcher; do not call directly from consumers. The per-material
      * {@link IMicroMaterial#loadIcons()} callback remains a supported extension hook.
      */
+    @SideOnly(Side.CLIENT)
     public static void loadIcons() {
         if (idMap != null) {
             for (Tuple2<String, IMicroMaterial> entry : idMap) {

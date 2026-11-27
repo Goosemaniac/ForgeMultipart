@@ -6,6 +6,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import codechicken.lib.raytracer.ExtendedMOP;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.Tuple2;
 
 /**
@@ -21,6 +23,7 @@ public final class BlockMultipart$ {
         return BlockMultipart.getTile(world, x, y, z);
     }
 
+    @SideOnly(Side.CLIENT)
     public TileMultipartClient getClientTile(IBlockAccess world, int x, int y, int z) {
         return BlockMultipart.getClientTile(world, x, y, z);
     }

@@ -13,6 +13,8 @@ import com.gtnewhorizon.gtnhlib.client.model.ModelISBRH;
 
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Vector3;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import scala.collection.Iterator;
 import scala.collection.Seq;
 
@@ -85,6 +87,7 @@ public class TileMultipartClient extends TileMultipart {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean renderStatic(IBlockAccess world, Vector3 vector, RenderBlocks renderer) {
         if (staticCache == null) {
             updateRenderCache();
@@ -173,6 +176,7 @@ final class TileMultipartClientAccess {
                 multipart.zCoord + 1);
     }
 
+    @SideOnly(Side.CLIENT)
     static boolean renderPart(TMultiPart part, IBlockAccess world, Vector3 vector, RenderBlocks renderer) {
         if (part == null) {
             return false;

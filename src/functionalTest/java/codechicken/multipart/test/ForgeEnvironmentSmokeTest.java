@@ -535,27 +535,30 @@ class ForgeEnvironmentSmokeTest {
             clientSignatures.add(method.name + method.desc);
         }
         String prefix = "codechicken$multipart$TileMultipartClient$$";
-        assertEquals(
-                new TreeSet<>(
-                        Arrays.asList(
-                                prefix + "cachedRenderBounds()Lnet/minecraft/util/AxisAlignedBB;",
-                                prefix + "cachedRenderBounds_$eq(Lnet/minecraft/util/AxisAlignedBB;)V",
-                                prefix + "dynamicCache()[Lcodechicken/multipart/TMultiPart;",
-                                prefix + "dynamicCache_$eq([Lcodechicken/multipart/TMultiPart;)V",
-                                prefix + "staticCache()[Lcodechicken/multipart/TMultiPart;",
-                                prefix + "staticCache_$eq([Lcodechicken/multipart/TMultiPart;)V",
-                                prefix + "super$markRender()V",
-                                "getRenderBoundingBox()Lnet/minecraft/util/AxisAlignedBB;",
-                                "hasDynamicParts()Z",
-                                "hasDynamicParts_$eq(Z)V",
-                                "markRender()V",
-                                "randomDisplayTick(Ljava/util/Random;)V",
-                                "renderDynamic(Lcodechicken/lib/vec/Vector3;FI)V",
-                                "renderStatic(Lnet/minecraft/world/IBlockAccess;Lcodechicken/lib/vec/Vector3;"
-                                        + "Lnet/minecraft/client/renderer/RenderBlocks;)Z",
-                                "shouldRenderInPass(I)Z",
-                                "updateRenderCache()V")),
-                clientSignatures);
+        Set<String> expectedClientSignatures = new TreeSet<>(
+                Arrays.asList(
+                        prefix + "cachedRenderBounds()Lnet/minecraft/util/AxisAlignedBB;",
+                        prefix + "cachedRenderBounds_$eq(Lnet/minecraft/util/AxisAlignedBB;)V",
+                        prefix + "dynamicCache()[Lcodechicken/multipart/TMultiPart;",
+                        prefix + "dynamicCache_$eq([Lcodechicken/multipart/TMultiPart;)V",
+                        prefix + "staticCache()[Lcodechicken/multipart/TMultiPart;",
+                        prefix + "staticCache_$eq([Lcodechicken/multipart/TMultiPart;)V",
+                        prefix + "super$markRender()V",
+                        "getRenderBoundingBox()Lnet/minecraft/util/AxisAlignedBB;",
+                        "hasDynamicParts()Z",
+                        "hasDynamicParts_$eq(Z)V",
+                        "markRender()V",
+                        "randomDisplayTick(Ljava/util/Random;)V",
+                        "renderDynamic(Lcodechicken/lib/vec/Vector3;FI)V",
+                        "shouldRenderInPass(I)Z",
+                        "updateRenderCache()V"));
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            // The render hook is a client-only trait member, so the server side leaves it out entirely.
+            expectedClientSignatures.add(
+                    "renderStatic(Lnet/minecraft/world/IBlockAccess;Lcodechicken/lib/vec/Vector3;"
+                            + "Lnet/minecraft/client/renderer/RenderBlocks;)Z");
+        }
+        assertEquals(expectedClientSignatures, clientSignatures);
 
         Set<String> randomSignatures = new TreeSet<>();
         for (org.objectweb.asm.tree.MethodNode method : randomNode.methods) {
